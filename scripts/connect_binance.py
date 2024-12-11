@@ -7,15 +7,10 @@ load_dotenv()
 api_key = os.getenv('BINANCE_API_KEY')
 secret_key = os.getenv('BINANCE_SECRET_KEY')
 
+# Check API keys
+if not api_key or not secret_key:
+    raise ValueError("API key and Secret key must be set in the environment variables.")
+
 # Connect to Binance Futures Testnet
 client = Client(api_key, secret_key, testnet=True)
-
-# Fetch symbols
-exchange_info = client.futures_exchange_info()
-symbols = [symbol['symbol'] for symbol in exchange_info['symbols']]
-print(f"Available Symbols: {symbols}")
-
-# 30 symbols
-symbols = symbols[:30]
-print(f"Available Symbols: {symbols}")
-
+print("Successfully connected to Binance Futures Testnet.")
